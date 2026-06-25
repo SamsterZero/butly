@@ -3,9 +3,10 @@
 > Butly is a URL shortener service.
 > "Butly" is slang for *short*, representing compact URLs.
 
-![Java](https://img.shields.io/badge/Java-17%2B-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
+![Java](https://img.shields.io/badge/Java-25-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.x-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
+![GHCR](https://img.shields.io/badge/GHCR-container-blue)
 
 ---
 ## 🧑‍💻 Development Setup
@@ -22,6 +23,7 @@ This project is optimized for Docker + VS Code Dev Containers.
 - [Features](#️-features)
 - [Architecture](#-architecture)
 - [Getting Started](#-getting-started)
+- [Run with Docker](#-run-with-docker-recommended)
 - [API](#-api)
 - [Redis Key Schema](#-redis-key-schema)
 - [Environment Variables](#-environment-variables)
@@ -79,14 +81,44 @@ Client → Spring Boot → Redis → PostgreSQL
 ### Run with Docker
 
 ```bash
-# 1. Copy the example env file and fill in your own values
-cp .env.docker.example .env.docker
-
-# 2. Start all services
-docker-compose up -d
+docker run -p 8080:8080 ghcr.io/samsterzero/butly:latest
 ```
 
 The service will be available at `http://localhost:8080` (adjust if you've changed the port).
+
+### 🧩 Run full stack (App + Postgres + Redis)
+
+```yaml
+services:
+  app:
+    image: ghcr.io/samsterzero/butly:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/butly
+      SPRING_DATASOURCE_USERNAME: butly
+      SPRING_DATASOURCE_PASSWORD: change_me
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: butly
+      POSTGRES_USER: butly
+      POSTGRES_PASSWORD: change_me
+
+  redis:
+    image: redis:8-alpine
+```
+
+**Run:**
+```bash
+docker compose up -d
+```
 
 ### Run locally (without Docker)
 
