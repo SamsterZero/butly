@@ -3,9 +3,9 @@ spring:
     name: butly
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/butly}
-    username: ${SPRING_DATASOURCE_USERNAME:butly}
-    password: ${SPRING_DATASOURCE_PASSWORD:appuser@123}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
   jpa:
     hibernate:
@@ -16,3 +16,5 @@ spring:
     redis:
       host: ${SPRING_REDIS_HOST:redis}
       port: ${SPRING_REDIS_PORT:6379}
+      repositories:
+        enabled: false
