@@ -34,8 +34,8 @@ This project is optimized for Docker + VS Code Dev Containers.
 
 | Component | Technology |
 |---|---|
-| Language | Java 17+ |
-| Framework | Spring Boot 3.x |
+| Language | Java 25 |
+| Framework | Spring Boot 4.x |
 | Database | PostgreSQL |
 | Cache | Redis |
 | ORM | JPA (Hibernate) |
@@ -72,7 +72,7 @@ Client → Spring Boot → Redis → PostgreSQL
 
 ### Prerequisites
 
-- Java 17+
+- Java 25
 - Docker & Docker Compose
 - Maven (or use the included wrapper `./mvnw`)
 
