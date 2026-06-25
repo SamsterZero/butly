@@ -23,7 +23,7 @@ This will:
 - Build the development environment
 - Start PostgreSQL and Redis (if configured)
 - Mount the project inside the container
-- Set up Java 17+ and Maven
+- Set up Java 25 and Maven
 
 ---
 
