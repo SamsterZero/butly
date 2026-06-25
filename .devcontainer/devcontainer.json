@@ -1,0 +1,66 @@
+{
+  "name": "Butly Dev Container",
+  "dockerComposeFile": "../.devcontainer/compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "containerEnv": {
+    "SPRING_DATASOURCE_URL": "jdbc:postgresql://postgres:5432/butly",
+    "SPRING_DATASOURCE_USERNAME": "butly",
+    "SPRING_DATASOURCE_PASSWORD": "appuser@123",
+    "SPRING_REDIS_HOST": "redis",
+    "SPRING_REDIS_PORT": "6379"
+  },
+
+  "shutdownAction": "stopCompose",
+
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "25",
+      "installMaven": "true"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-spring-initializr",
+        "vscjava.vscode-spring-boot-dashboard",
+
+        "vmware.vscode-boot-dev-pack",
+
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml",
+
+        "cweijan.vscode-postgresql-client2",
+        "cweijan.vscode-redis-client",
+        
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.compile.nullAnalysis.mode": "automatic",
+      }
+    }
+  },
+
+  "forwardPorts": [8080, 5432, 6379],
+  "portsAttributes": {
+    "8080": {
+      "label": "Butly App",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "postCreateCommand": "mvn -q -DskipTests dependency:go-offline || true",
+
+  "remoteUser": "vscode"
+}

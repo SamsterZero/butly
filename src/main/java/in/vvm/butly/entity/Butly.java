@@ -28,12 +28,13 @@ import lombok.Setter;
 public class Butly {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "long_url", nullable = false, length = 2048)
     private String longUrl;
 
-    @Column(name = "short_url", nullable = false, unique = true, length = 10)
+    @Column(name = "short_url", unique = true, length = 10)
     private String shortUrl;
 
     @CreationTimestamp
@@ -46,10 +47,4 @@ public class Butly {
 
     @Column(name = "deleted_at", nullable = true)
     private Instant deletedAt;
-
-    @PostPersist
-    @PostUpdate
-    public void generatedShortUrl() {
-        this.shortUrl = Base62.encode(this.id);
-    }
 }

@@ -1,19 +1,19 @@
-services:
-  pgsql:
-    image: postgres:18
-    container_name: butly-db
-    env_file:
-      - .env.docker
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+# services:
+#   pgsql:
+#     image: postgres:18
+#     container_name: butly-db
+#     env_file:
+#       - .env.docker
+#     ports:
+#       - 5432:5432
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
 
-  redis:
-    image: redis:8.8.0-alpine
-    container_name: butly-cache
-    ports:
-      - 6379:6379
+#   redis:
+#     image: redis:8.8.0-alpine
+#     container_name: butly-cache
+#     ports:
+#       - 6379:6379
 
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:

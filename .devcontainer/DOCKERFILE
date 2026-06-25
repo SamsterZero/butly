@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/devcontainers/java:25
+
+# Install Maven (the base image includes a JDK but not always the latest Maven)
+ARG MAVEN_VERSION=3.9.6
+
+# Install psql and redis-cli for quick debugging inside the container
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get install -y --no-install-recommends \
+        postgresql-client \
+        redis-tools \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Non-root user already provided by the base image as "vscode"
+USER vscode
+
+# Pre-create the Maven local repo cache dir owned by vscode (mounted as a volume in compose.yaml)
+RUN mkdir -p /home/vscode/.m2

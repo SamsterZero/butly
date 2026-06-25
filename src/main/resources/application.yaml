@@ -1,17 +1,18 @@
 spring:
   application:
     name: butly
-  
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/butly
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/butly}
+    username: ${SPRING_DATASOURCE_USERNAME:butly}
+    password: ${SPRING_DATASOURCE_PASSWORD:appuser@123}
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  
+
   data:
     redis:
-      host: ${REDIS_HOST}
-      port: ${REDIS_PORT}
+      host: ${SPRING_REDIS_HOST:redis}
+      port: ${SPRING_REDIS_PORT:6379}

@@ -8,6 +8,13 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 ---
+## 🧑‍💻 Development Setup
+
+This project is optimized for Docker + VS Code Dev Containers.
+
+👉 See CONTRIBUTING.md for full setup instructions.
+
+---
 
 ## 📑 Table of Contents
 
